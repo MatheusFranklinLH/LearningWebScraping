@@ -9,10 +9,9 @@ public class RegexUtilsTest {
 	public void testRegex() {
 		String input = "<span>Exemplo</span>\n<span> </span> e também <span>Red Bull</span>.";
 
-		final String[] expectedAnwser = { "Exemplo", "e também ", "Red Bull" };
-		String regexExpr = ">([^<>\\]+[^<>\\]*)<";
-		String regexExpr2 = ">([^<>\t\n ]+[^<>\t\n]*)<";
-		String[] anwser = RegexUtils.filterAsList(input, regexExpr2).toArray(new String[3]);
+		final String[] expectedAnwser = { "Exemplo", " e também ", "Red Bull" };
+		String regexExpr = ">([^<>\t\n]*[^<>\t\n ]+[^<>\t\n]*)<";
+		String[] anwser = RegexUtils.filterAsList(input, regexExpr).toArray(new String[3]);
 		assertArrayEquals(expectedAnwser, anwser);
 	}
 }

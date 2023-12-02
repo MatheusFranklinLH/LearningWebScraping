@@ -6,11 +6,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.learn.models.TeamStatistics;
 import com.learn.utils.PrintUtils;
@@ -24,6 +26,11 @@ public class Pure {
 		// PrintUtils.info("" + pure.getNeedScoreToDrawLeader("Atlético-MG"));
 		Map<String, List<String>> brasileiraoInfo = getBrasileiraoInfo();
 		List<TeamStatistics> teamsStatistics = TeamStatistics.fromHashMap(brasileiraoInfo);
+		TeamStatistics.printTableHeader();
+		teamsStatistics = teamsStatistics.stream()
+				.sorted(Comparator.comparing(TeamStatistics::getScore).thenComparing(TeamStatistics::getWins)
+						.thenComparing(TeamStatistics::getGoalsDifference).reversed())
+				.collect(Collectors.toList());
 		for (TeamStatistics statistics : teamsStatistics) {
 			statistics.printStatistics();
 		}
@@ -67,7 +74,7 @@ public class Pure {
 
 	private static Map<String, List<String>> getTableInfo(String string) {
 		Map<String, List<String>> tableInfo = new HashMap<>(); // To O(1) access;
-		String regexExpr = ">([^<>\t\n ]+[^<>\t\n]*)<";
+		String regexExpr = ">([^<>\t\n]*[^<>\t\n ]+[^<>\t\n]*)<";
 		Pattern pattern = Pattern.compile(regexExpr, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(string);
 		int trashCount = 0;

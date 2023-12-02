@@ -32,6 +32,22 @@ public class TeamStatistics {
 		this.efficiency = efficiency;
 	}
 
+	public int getScore() {
+		return this.score;
+	}
+
+	public int getWins() {
+		return this.wins;
+	}
+
+	public int getGoalsDifference() {
+		return this.goalsDifference;
+	}
+
+	public int getGoalsScored() {
+		return this.goalsScored;
+	}
+
 	public static List<TeamStatistics> fromHashMap(Map<String, List<String>> teamsInfo) {
 		List<TeamStatistics> teamStatistics = new ArrayList<>();
 		for (Map.Entry<String, List<String>> entry : teamsInfo.entrySet()) {
@@ -63,16 +79,33 @@ public class TeamStatistics {
 	public void printStatistics() {
 		String print = "";
 
-		print += String.format("%-" + 20 + "s", this.teamName);
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.score));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.games));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.wins));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.draws));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.loses));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.goalsScored));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.goalsTaken));
-		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.goalsDifference));
-		print += "| " + String.format("%-" + 4 + "s", Double.toString(this.efficiency));
+		print += String.format("%" + 20 + "s", this.teamName);
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.score));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.games));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.wins));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.draws));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.loses));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.goalsScored));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.goalsTaken));
+		print += "| " + String.format("%" + 3 + "s", Integer.toString(this.goalsDifference));
+		print += "| " + String.format("%" + 4 + "s", Double.toString(this.efficiency));
+
+		PrintUtils.print(print);
+	}
+
+	public static void printTableHeader() {
+		String print = "";
+
+		print += String.format("%" + 20 + "s", "Time");
+		print += "| " + String.format("%" + 3 + "s", "P");
+		print += "| " + String.format("%" + 3 + "s", "J");
+		print += "| " + String.format("%" + 3 + "s", "V");
+		print += "| " + String.format("%" + 3 + "s", "E");
+		print += "| " + String.format("%" + 3 + "s", "D");
+		print += "| " + String.format("%" + 3 + "s", "GP");
+		print += "| " + String.format("%" + 3 + "s", "GC");
+		print += "| " + String.format("%" + 3 + "s", "SG");
+		print += "| " + String.format("%" + 4 + "s", "%");
 
 		PrintUtils.print(print);
 	}
