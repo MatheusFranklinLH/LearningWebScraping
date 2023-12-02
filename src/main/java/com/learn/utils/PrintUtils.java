@@ -1,6 +1,10 @@
 package com.learn.utils;
 
 public class PrintUtils {
+	public static void print(String s) {
+		System.out.println(s);
+	}
+
 	public static void debug(String s) {
 		System.out.println("[DEBUG] " + s);
 	}

@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.learn.models.TeamStatistics;
 import com.learn.utils.PrintUtils;
 import com.learn.utils.RegexUtils;
 
@@ -20,10 +21,15 @@ public class Pure {
 	// líder do campeonato.
 	public static void main(String[] args) {
 		Pure pure = new Pure();
-		PrintUtils.info("" + pure.getNeedPointsToDrawLeader("Atlético-MG"));
+		// PrintUtils.info("" + pure.getNeedScoreToDrawLeader("Atlético-MG"));
+		Map<String, List<String>> brasileiraoInfo = getBrasileiraoInfo();
+		List<TeamStatistics> teamsStatistics = TeamStatistics.fromHashMap(brasileiraoInfo);
+		for (TeamStatistics statistics : teamsStatistics) {
+			statistics.printStatistics();
+		}
 	}
 
-	public int getNeedPointsToDrawLeader(String team) {
+	public int getNeedScoreToDrawLeader(String team) {
 		Map<String, List<String>> brasileiraoInfo = getBrasileiraoInfo();
 		if (!brasileiraoInfo.containsKey(team)) {
 			PrintUtils.error(team + " não está no Brasileirão Série A");
@@ -31,20 +37,20 @@ public class Pure {
 		}
 		String leaderPontuation = brasileiraoInfo.get("Palmeiras").get(0);
 		String teamPontuation = brasileiraoInfo.get(team).get(0);
-		int neededPointsToDraw = -1;
+		int neededScoreToDraw = -1;
 
 		try {
-			neededPointsToDraw = Integer.parseInt(leaderPontuation) - Integer.parseInt(teamPontuation);
+			neededScoreToDraw = Integer.parseInt(leaderPontuation) - Integer.parseInt(teamPontuation);
 		} catch (NumberFormatException e) {
 			PrintUtils.error("Erro ao converter pontuação para inteiro. Message: " + e.getMessage());
 			return -1;
 		}
 
-		if (neededPointsToDraw < -1) {
+		if (neededScoreToDraw < -1) {
 			PrintUtils.error("Pontuação do time maior do que pontuação do líder.");
 			return -1;
 		}
-		return neededPointsToDraw;
+		return neededScoreToDraw;
 	}
 
 	private static Map<String, List<String>> getBrasileiraoInfo() {
@@ -62,8 +68,7 @@ public class Pure {
 	private static Map<String, List<String>> getTableInfo(String string) {
 		Map<String, List<String>> tableInfo = new HashMap<>(); // To O(1) access;
 		String regexExpr = ">([^<>\\s]+)<";
-		String patternString = regexExpr;
-		Pattern pattern = Pattern.compile(patternString, Pattern.DOTALL);
+		Pattern pattern = Pattern.compile(regexExpr, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(string);
 		int trashCount = 0;
 		int teamCount = 0;

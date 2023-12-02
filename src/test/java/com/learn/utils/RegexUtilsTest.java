@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class RegexUtilsTest {
 	@Test
-	public void testWebScraping() {
+	public void testRegex() {
 		String input = "<span>Exemplo</span>\n<span> </span> e também <span>Red Bull</span>.";
 
 		final String[] expectedAnwser = { "Exemplo", "Red Bull" };
