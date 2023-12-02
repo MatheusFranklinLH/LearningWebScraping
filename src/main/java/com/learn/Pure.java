@@ -22,7 +22,7 @@ public class Pure {
 	// Calcula a quantidade de pontos que o Atlético-MG precisa para empatar com o
 	// líder do campeonato.
 	public static void main(String[] args) {
-		Pure pure = new Pure();
+		// Pure pure = new Pure();
 		// PrintUtils.info("" + pure.getNeedScoreToDrawLeader("Atlético-MG"));
 		Map<String, List<String>> brasileiraoInfo = getBrasileiraoInfo();
 		List<TeamStatistics> teamsStatistics = TeamStatistics.fromHashMap(brasileiraoInfo);
