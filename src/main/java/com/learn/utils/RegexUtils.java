@@ -12,7 +12,7 @@ public class RegexUtils {
 
 	public static String filter(String string, String regexExpr) {
 		String patternString = regexExpr;
-		Pattern pattern = Pattern.compile(patternString, Pattern.DOTALL);
+		Pattern pattern = Pattern.compile(patternString);
 		// Cria um matcher correspondente ao padrão
 		Matcher matcher = pattern.matcher(string);
 
@@ -28,7 +28,7 @@ public class RegexUtils {
 
 	public static List<String> filterAsList(String string, String regexExpr) {
 		String patternString = regexExpr;
-		Pattern pattern = Pattern.compile(patternString, Pattern.DOTALL);
+		Pattern pattern = Pattern.compile(patternString);
 		// Cria um matcher correspondente ao padrão
 		Matcher matcher = pattern.matcher(string);
 

@@ -63,7 +63,7 @@ public class TeamStatistics {
 	public void printStatistics() {
 		String print = "";
 
-		print += String.format("%-" + 15 + "s", this.teamName);
+		print += String.format("%-" + 20 + "s", this.teamName);
 		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.score));
 		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.games));
 		print += "| " + String.format("%-" + 3 + "s", Integer.toString(this.wins));

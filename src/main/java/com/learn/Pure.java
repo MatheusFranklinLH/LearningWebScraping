@@ -67,7 +67,7 @@ public class Pure {
 
 	private static Map<String, List<String>> getTableInfo(String string) {
 		Map<String, List<String>> tableInfo = new HashMap<>(); // To O(1) access;
-		String regexExpr = ">([^<>\\s]+)<";
+		String regexExpr = ">([^<>\t\n ]+[^<>\t\n]*)<";
 		Pattern pattern = Pattern.compile(regexExpr, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(string);
 		int trashCount = 0;
@@ -82,13 +82,14 @@ public class Pure {
 			String tableContent = matcher.group(1);
 			teamCount++;
 			if (teamCount == 1) {
+				continue;
+			}
+			if (teamCount == 2) {
 				teamName = tableContent;
-				PrintUtils.debug("Time: " + tableContent);
 				continue;
 			}
 			teamInfo.add(tableContent);
-			PrintUtils.debug("Info: " + tableContent);
-			if (teamCount == 10) {
+			if (teamCount == 11) {
 				tableInfo.put(teamName, teamInfo);
 				teamInfo = new ArrayList<>();
 				teamCount = 0;
