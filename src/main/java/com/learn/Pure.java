@@ -65,7 +65,6 @@ public class Pure {
 		String patternString = regexExpr;
 		Pattern pattern = Pattern.compile(patternString, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(string);
-
 		int trashCount = 0;
 		int teamCount = 0;
 		String teamName = "";
